@@ -10,8 +10,20 @@ class KehadiranController extends Controller
 {
     public function index()
     {
-        $kehadirans = Kehadiran::where('user_id', Auth::id())->get();
+        $kehadirans = Kehadiran::with('user')
+            ->where('user_id', Auth::id())
+            ->orderBy('date', 'desc') // Urutkan berdasarkan tanggal terbaru
+            ->get();
+    
         return view('kehadiran.index', compact('kehadirans'));
+    }
+
+    public function adminIndex()
+    {
+        // Mengambil semua kehadiran dari database
+        $kehadirans = Kehadiran::with('user')->get(); // Mengambil relasi user untuk mendapatkan nama
+
+        return view('admin.kehadiran.index', compact('kehadirans')); // Ganti 'admin.kehadiran.index' sesuai dengan view Anda
     }
 
     public function checkIn(Request $request)

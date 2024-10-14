@@ -10,16 +10,13 @@ class CreateKehadiransTable extends Migration
     {
         Schema::create('kehadirans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->string('shift');
-            $table->date('date');
-            $table->time('check_in')->nullable();
-            $table->time('check_out')->nullable();
-            $table->string('location');
-            $table->timestamps();
-
-            // Foreign key constraint (assuming a users table exists)
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Foreign key ke users
+            $table->string('shift'); // Shift: Pagi atau Sore
+            $table->date('date'); // Tanggal absen
+            $table->time('check_in')->nullable(); // Waktu masuk
+            $table->time('check_out')->nullable(); // Waktu pulang
+            $table->string('location'); // Lokasi absen
+            $table->timestamps(); // Timestamps created_at & updated_at
         });
     }
 

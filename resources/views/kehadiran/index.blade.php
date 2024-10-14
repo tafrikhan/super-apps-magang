@@ -1,6 +1,10 @@
 <div class="container">
     <h1>Absensi</h1>
 
+    <div class="alert alert-info">
+        <strong>Nama Pengguna:</strong> {{ Auth::user()->name }}
+    </div>
+
     <form action="{{ route('kehadirans.checkin') }}" method="POST">
         @csrf
         <div class="form-group">
@@ -25,6 +29,7 @@
     <table class="table table-bordered">
         <thead>
             <tr>
+                <th>Nama</th>
                 <th>Tanggal</th>
                 <th>Shift</th>
                 <th>Masuk</th>
@@ -36,10 +41,11 @@
         <tbody>
             @foreach ($kehadirans as $kehadiran)
                 <tr>
+                    <td>{{ $kehadiran->user->name }}</td> <!-- Menampilkan nama pengguna -->
                     <td>{{ $kehadiran->date }}</td>
                     <td>{{ $kehadiran->shift }}</td>
-                    <td>{{ $kehadiran->check_in }}</td>
-                    <td>{{ $kehadiran->check_out }}</td>
+                    <td>{{ $kehadiran->check_in ?? '-' }}</td>
+                    <td>{{ $kehadiran->check_out ?? '-' }}</td>
                     <td>{{ $kehadiran->location }}</td>
                     <td>
                         @if (!$kehadiran->check_out)
@@ -56,6 +62,7 @@
             @endforeach
         </tbody>
     </table>
+    
 </div>
 
 <script>
@@ -87,4 +94,3 @@
         }
     });
 </script>
-

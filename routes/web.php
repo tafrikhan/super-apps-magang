@@ -22,6 +22,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/kehadiran/checkout/{id}', [KehadiranController::class, 'checkOut'])->name('kehadirans.checkout');
 });
 
+Route::middleware(['auth:admin'])->group(function () {
+    Route::get('/admin/kehadiran', [KehadiranController::class, 'adminIndex'])->name('admin.kehadiran.index');
+});
+
+
 require __DIR__.'/auth.php';
 
 require __DIR__.'/admin-auth.php';

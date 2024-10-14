@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\KehadiranController;
 
 Route::prefix('admin')->middleware('guest:admin')->group(function () {
 
@@ -19,6 +20,9 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
+
+    Route::get('/admin/kehadiran', [KehadiranController::class, 'adminIndex'])->name('admin.kehadiran.index');
+
 
     Route::post('logout', [LoginController::class, 'destroy'])->name('admin.logout');
 
