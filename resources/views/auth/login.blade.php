@@ -1,6 +1,11 @@
 <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
+    <div class="flex justify-center">
+        <a>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQklJ0c2uKkN9rFBBfFTqESoy2S6dBxAsZIpQ&s" alt="Deskripsi Gambar" class="w-1/2"> <!-- Ubah ukuran sesuai kebutuhan -->
+        </a>
+    </div>
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
