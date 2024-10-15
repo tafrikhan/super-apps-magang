@@ -134,7 +134,7 @@
           <div class="container">
                     <h1>Riwayat Absensi - Admin</h1>
           
-                    <table class="table table-bordered">
+                    <table class="table table-dark table-striped">
                     <thead>
                     <tr>
                               <th>Nama Pengguna</th>
