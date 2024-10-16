@@ -1,8 +1,6 @@
-<<<<<<< HEAD
-# super-apps-magang
-=======
 # Project Absensi Magang
 
+Welcome To The Remote Repository
 ## Deskripsi
 Aplikasi super-apps-magang menggunakan Laravel 11.
 
@@ -52,4 +50,3 @@ Gunakan Tag dan Release:
 
 Tandai versi stabil proyek Anda dengan tag dan rilis di GitHub.
 **
->>>>>>> c5ddb83 (first commit)
