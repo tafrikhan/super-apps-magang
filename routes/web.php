@@ -24,6 +24,8 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth:admin'])->group(function () {
     Route::get('/admin/kehadiran', [KehadiranController::class, 'adminIndex'])->name('admin.kehadiran.index');
+    Route::delete('/kehadirans/{id}', [KehadiranController::class, 'destroy'])->name('kehadirans.destroy');
+
 });
 
 

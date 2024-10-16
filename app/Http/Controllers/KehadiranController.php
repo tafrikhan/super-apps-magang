@@ -61,4 +61,13 @@ class KehadiranController extends Controller
 
         return redirect()->back()->with('success', 'Berhasil absen pulang!');
     }
+
+    public function destroy($id)
+    {
+        $kehadiran = Kehadiran::findOrFail($id);
+        $kehadiran->delete();
+
+        return redirect()->back()->with('success', 'Kehadiran berhasil dihapus!');
+    }
+
 }

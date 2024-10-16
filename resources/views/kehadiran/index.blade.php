@@ -8,9 +8,9 @@
 
 @section('content')
 <div class="container my-5 mx-auto">
-    <h1 class="mb-4 text-center">Absensi</h1>
+    <h1 class="mb-4">Absensi</h1>
 
-    <div class="alert alert-info text-center">
+    <div class="alert alert-info">
         <strong>Nama:</strong> {{ Auth::user()->name }}
     </div>
 
@@ -29,57 +29,54 @@
                 <input type="text" name="location" id="location" class="form-control" readonly required>
             </div>
         </div>
-        <div class="form-group">
-            <label for="current-time" class="form-label">Waktu Saat Ini (WIB):</label>
-            <input type="text" id="current-time" class="form-control" value="" readonly>
-        </div>
         <button type="submit" class="btn btn-primary w-100 mt-2">Absen Masuk</button>
     </form>
 
     <hr>
-
-    <h2 class="text-center mb-4">Riwayat Absen</h2>
-    <div class="table-responsive">
-        <table class="table table-striped table-bordered align-middle">
-            <thead class="table-dark text-center">
-                <tr>
-                    <th>Nama</th>
-                    <th>Tanggal</th>
-                    <th>Shift</th>
-                    <th>Masuk</th>
-                    <th>Pulang</th>
-                    <th>Lokasi</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($kehadirans as $kehadiran)
-                <tr class="text-center">
-                    <td>{{ $kehadiran->user->name }}</td>
-                    <td>{{ $kehadiran->date }}</td>
-                    <td>{{ $kehadiran->shift }}</td>
-                    <td>{{ $kehadiran->check_in ? $kehadiran->check_in->format('H:i') : '-' }}</td> <!-- Menampilkan jam masuk -->
-                    <td>{{ $kehadiran->check_out ? $kehadiran->check_out->format('H:i') : '-' }}</td> <!-- Menampilkan jam pulang -->
-                    <td>{{ $kehadiran->location }}</td>
-                    <td>
-                        @if (!$kehadiran->check_out)
-                        <form action="{{ route('kehadirans.checkout', $kehadiran->id) }}" method="POST" class="mt-2">
-                            @csrf
-                            <input type="text" name="location" id="checkout-location" class="form-control" readonly required>
-                            <button type="submit" class="btn btn-danger mt-2 w-100">Absen Pulang</button>
-                        </form>
-                        @else
-                        <span class="badge bg-success">Sudah Pulang</span>
-                        @endif
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-            
-            
-        </table>
+    <div class="card">
+        <h5 class="card-header">Riwayat Absen</h5>
+        <div class="table-responsive text-nowrap">
+            <table class="table">
+                <thead class="table-light">
+                    <tr>
+                        <th class="text-center">Nama</th>
+                        <th class="text-center">Tanggal</th>
+                        <th class="text-center">Shift</th>
+                        <th class="text-center">Masuk</th>
+                        <th class="text-center">Pulang</th>
+                        <th class="text-center">Lokasi</th>
+                        <th class="text-center">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    @foreach ($kehadirans as $kehadiran)
+                    <tr class="text-center">
+                        <td>{{ $kehadiran->user->name }}</td>
+                        <td>{{ $kehadiran->date }}</td>
+                        <td>{{ $kehadiran->shift }}</td>
+                        <td>{{ $kehadiran->check_in ? $kehadiran->check_in->format('H:i') : '-' }}</td>
+                        <td>{{ $kehadiran->check_out ? $kehadiran->check_out->format('H:i') : '-' }}</td>
+                        <td>{{ $kehadiran->location }}</td>
+                        <td>
+                            @if (!$kehadiran->check_out)
+                            <form action="{{ route('kehadirans.checkout', $kehadiran->id) }}" method="POST" class="d-inline">
+                                @csrf
+                                <input type="text" name="location" value="{{ $kehadiran->location }}" class="form-control" readonly required style="display: inline; width: auto;">
+                                <button type="submit" class="btn btn-danger btn-sm">Absen Pulang</button>
+                            </form>
+                            @else
+                            <span class="badge bg-success">Sudah Pulang</span>
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
+    
+    
+    
 
 <script>
     // Mendapatkan lokasi secara otomatis
