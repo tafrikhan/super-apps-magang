@@ -3,35 +3,52 @@
 @section('title', 'Edit Profile')
 
 @section('content')
-<div class="container py-5">
-    <h2>Edit Profile</h2>
+<div class="container my-5 mx-auto">
+    <h1 class="mb-4 text-right" style="font-family: 'Arial', sans-serif;">Edit Profil</h1>
 
-    <ul class="nav nav-tabs" role="tablist">
+    @if (session('status') === 'profile-updated')
+        <div class="alert alert-success" style="background-color: #d4edda; color: #155724;">
+            Profil berhasil diperbarui.
+        </div>
+    @endif
+
+    <ul class="nav nav-tabs mb-4" role="tablist">
         <li class="nav-item" role="presentation">
             <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" role="tab">
-                Update Profile
+                Perbarui Profil
             </button>
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="password-tab" data-bs-toggle="tab" data-bs-target="#password" role="tab">
-                Change Password
+                Ganti Password
             </button>
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="delete-tab" data-bs-toggle="tab" data-bs-target="#delete" role="tab">
-                Delete Account
+                Hapus Akun
             </button>
         </li>
     </ul>
 
-    <div class="tab-content mt-4">
+    <div class="tab-content">
         <div class="tab-pane fade show active" id="profile" role="tabpanel">
-            <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data" 
+                  class="p-4 border rounded shadow-sm" style="background-color: #f9f9f9;">
                 @csrf
                 @method('PATCH')
 
+                <div class="text-center mb-4">
+                    <label for="profile_photo" class="form-label">Foto Profil</label>
+                    <div class="mt-2">
+                        <img src="{{ asset(auth()->user()->profile_photo ? 'storage/' . auth()->user()->profile_photo : 'assets/img/avatars/default.jpg') }}" 
+                             alt="User Avatar" 
+                             class="w-px-150 h-auto rounded-circle shadow" />
+                    </div>
+                    <input type="file" class="form-control mt-3" id="profile_photo" name="profile_photo" accept="image/*">
+                </div>
+
                 <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
+                    <label for="name" class="form-label">Nama</label>
                     <input type="text" class="form-control" id="name" name="name" 
                            value="{{ auth()->user()->name }}" required>
                 </div>
@@ -43,14 +60,38 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="profile_photo" class="form-label">Profile Photo</label>
-                    <input type="file" class="form-control" id="profile_photo" name="profile_photo" accept="image/*">
-                    @if (auth()->user()->profile_photo)
-                        <img src="{{ asset('storage/' . auth()->user()->profile_photo) }}" alt="Profile Photo" class="mt-2" style="max-width: 150px;">
-                    @endif
+                    <label for="gender" class="form-label">Jenis Kelamin</label>
+                    <select class="form-select" id="gender" name="gender" required>
+                        <option value="male" {{ auth()->user()->gender === 'male' ? 'selected' : '' }}>Laki-laki</option>
+                        <option value="female" {{ auth()->user()->gender === 'female' ? 'selected' : '' }}>Perempuan</option>
+                    </select>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <div class="mb-3">
+                    <label for="address" class="form-label">Alamat</label>
+                    <input type="text" class="form-control" id="address" name="address" 
+                           value="{{ auth()->user()->address }}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="school" class="form-label">Asal Sekolah</label>
+                    <input type="text" class="form-control" id="school" name="school" 
+                           value="{{ auth()->user()->school }}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="internship_start" class="form-label">Tanggal Mulai Magang</label>
+                    <input type="date" class="form-control" id="internship_start" name="internship_start" 
+                           value="{{ auth()->user()->internship_start }}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="internship_end" class="form-label">Tanggal Selesai Magang</label>
+                    <input type="date" class="form-control" id="internship_end" name="internship_end" 
+                           value="{{ auth()->user()->internship_end }}" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 mt-2">Simpan Perubahan</button>
             </form>
         </div>
 

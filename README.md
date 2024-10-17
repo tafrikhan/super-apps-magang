@@ -32,6 +32,9 @@ Aplikasi super-apps-magang menggunakan Laravel 11.
    php artisan migrate
 
 8. Jalankan server:
+   php artisan storage:link
+
+9. Jalankan server:
    php artisan serve
 
 

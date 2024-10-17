@@ -18,40 +18,22 @@
 
                                     <div class="row mb-4">
                                         <!-- Name Input -->
-                                        <div class="col-md-6">
+                                        <div class="col-12">
                                             <div class="form-floating">
                                                 <x-text-input id="name" class="form-control" type="text" name="name" :value="old('name')" required autofocus placeholder="John Doe" />
                                                 <label for="name">Name</label>
                                                 <x-input-error :messages="$errors->get('name')" class="mt-2" />
                                             </div>
                                         </div>
+                                    </div>
 
+                                    <div class="row mb-4">
                                         <!-- Email Input -->
-                                        <div class="col-md-6">
+                                        <div class="col-12">
                                             <div class="form-floating">
                                                 <x-text-input id="email" class="form-control" type="email" name="email" :value="old('email')" required placeholder="name@example.com" />
                                                 <label for="email">Email</label>
                                                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row mb-4">
-                                        <!-- Alamat Input -->
-                                        <div class="col-md-6">
-                                            <div class="form-floating">
-                                                <x-text-input id="alamat" class="form-control" type="text" name="alamat" :value="old('alamat')" placeholder="Alamat" />
-                                                <label for="alamat">Alamat</label>
-                                                <x-input-error :messages="$errors->get('alamat')" class="mt-2" />
-                                            </div>
-                                        </div>
-
-                                        <!-- Asal Sekolah Input -->
-                                        <div class="col-md-6">
-                                            <div class="form-floating">
-                                                <x-text-input id="asal_sekolah" class="form-control" type="text" name="asal_sekolah" :value="old('asal_sekolah')" placeholder="Asal Sekolah" />
-                                                <label for="asal_sekolah">Asal Sekolah</label>
-                                                <x-input-error :messages="$errors->get('asal_sekolah')" class="mt-2" />
                                             </div>
                                         </div>
                                     </div>

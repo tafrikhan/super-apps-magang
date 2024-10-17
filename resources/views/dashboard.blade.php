@@ -15,7 +15,7 @@
                 <div class="card shadow">
                     <div class="card-body">
                         <p class="card-text">
-                            Selamat datang di dashboard Anda!
+                            Selamat datang di dashboard Anda! <b>{{ auth()->user()->name }}</b>
                         </p>
                     </div>
                 </div>
