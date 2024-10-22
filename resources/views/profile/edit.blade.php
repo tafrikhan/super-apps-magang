@@ -58,39 +58,6 @@
                     <input type="email" class="form-control" id="email" name="email" 
                            value="{{ auth()->user()->email }}" required>
                 </div>
-
-                <div class="mb-3">
-                    <label for="gender" class="form-label">Jenis Kelamin</label>
-                    <select class="form-select" id="gender" name="gender" required>
-                        <option value="male" {{ auth()->user()->gender === 'male' ? 'selected' : '' }}>Laki-laki</option>
-                        <option value="female" {{ auth()->user()->gender === 'female' ? 'selected' : '' }}>Perempuan</option>
-                    </select>
-                </div>
-
-                <div class="mb-3">
-                    <label for="address" class="form-label">Alamat</label>
-                    <input type="text" class="form-control" id="address" name="address" 
-                           value="{{ auth()->user()->address }}" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="school" class="form-label">Asal Sekolah</label>
-                    <input type="text" class="form-control" id="school" name="school" 
-                           value="{{ auth()->user()->school }}" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="internship_start" class="form-label">Tanggal Mulai Magang</label>
-                    <input type="date" class="form-control" id="internship_start" name="internship_start" 
-                           value="{{ auth()->user()->internship_start }}" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="internship_end" class="form-label">Tanggal Selesai Magang</label>
-                    <input type="date" class="form-control" id="internship_end" name="internship_end" 
-                           value="{{ auth()->user()->internship_end }}" required>
-                </div>
-
                 <button type="submit" class="btn btn-primary w-100 mt-2">Simpan Perubahan</button>
             </form>
         </div>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\RegisteredUserController;
+use App\Http\Controllers\Admin\PengajuanIzinUserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KehadiranController;
 
@@ -25,6 +26,10 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::get('/admin/kehadiran', [KehadiranController::class, 'adminIndex'])->name('admin.kehadiran.index');
 
     Route::resource('admin/users', AdminUserController::class)->names('admin.users');
+
+    Route::get('/admin/pengajuan-izin', [PengajuanIzinUserController::class, 'index'])->name('pengajuan_izin.index');
+    Route::post('/admin/pengajuan-izin/{pengajuanIzin}/approve', [PengajuanIzinUserController::class, 'approve'])->name('pengajuan_izin.approve');
+    Route::post('/admin/pengajuan-izin/{pengajuanIzin}/reject', [PengajuanIzinUserController::class, 'reject'])->name('pengajuan_izin.reject');
 
 
     Route::post('logout', [LoginController::class, 'destroy'])->name('admin.logout');

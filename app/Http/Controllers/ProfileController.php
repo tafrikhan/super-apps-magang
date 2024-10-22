@@ -7,13 +7,13 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Storage; // Import the Storage facade
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
     /**
-     * Display the user's profile form.
+     * Menampilkan form profil user.
      */
     public function edit(Request $request): View
     {
@@ -23,39 +23,50 @@ class ProfileController extends Controller
     }
 
     /**
-     * Update the user's profile information.
+     * Memperbarui informasi profil user.
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $user = $request->user();
 
-        // Fill the user with validated data
-        $user->fill($request->validated());
+        // Isi data user dengan data yang telah divalidasi
+        $validatedData = $request->validated();
+        $user->fill($validatedData);
 
-        // Check if the email has changed
+        // Periksa apakah email berubah
         if ($user->isDirty('email')) {
-            $user->email_verified_at = null; // Reset email verification
+            $user->email_verified_at = null; // Reset verifikasi email
         }
 
-        // Handle profile photo upload
+        // Cek apakah ada file foto profil yang diunggah
         if ($request->hasFile('profile_photo')) {
-            // Delete the old profile photo if it exists
-            if ($user->profile_photo) {
-                Storage::delete($user->profile_photo);
-            }
+            try {
+                // Hapus foto profil lama jika ada
+                if ($user->profile_photo && Storage::exists($user->profile_photo)) {
+                    Storage::delete($user->profile_photo);
+                }
 
-            // Store the new profile photo and update the user model
-            $path = $request->file('profile_photo')->store('profile_photos', 'public');
-            $user->profile_photo = $path;
+                // Simpan foto profil baru
+                $path = $request->file('profile_photo')->store('profile_photos', 'public');
+                $user->profile_photo = $path;
+
+            } catch (\Exception $e) {
+                return Redirect::back()->withErrors(['profile_photo' => 'Gagal mengunggah foto profil.']);
+            }
         }
 
-        $user->save(); // Save all changes to the user
+        // Simpan perubahan user jika ada perubahan
+        if ($user->isDirty()) {
+            $user->save();
+            return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        }
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        // Kembalikan jika tidak ada perubahan
+        return Redirect::route('profile.edit')->with('status', 'no-changes');
     }
 
     /**
-     * Delete the user's account.
+     * Menghapus akun user.
      */
     public function destroy(Request $request): RedirectResponse
     {
@@ -67,8 +78,8 @@ class ProfileController extends Controller
 
         Auth::logout();
 
-        // Delete the user's profile photo if it exists
-        if ($user->profile_photo) {
+        // Hapus foto profil jika ada
+        if ($user->profile_photo && Storage::exists($user->profile_photo)) {
             Storage::delete($user->profile_photo);
         }
 

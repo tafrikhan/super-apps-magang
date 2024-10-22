@@ -13,26 +13,15 @@ class ProfileUpdateRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
      */
-    public function rules(): array
+    public function rules()
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'email' => [
-                'required',
-                'string',
-                'lowercase',
-                'email',
-                'max:255',
-                Rule::unique(User::class)->ignore($this->user()->id),
-            ],
-            'gender' => ['required', 'in:male,female,other'],
-            'address' => ['required', 'string', 'max:255'],
-            'school' => ['required', 'string', 'max:255'],
-            'internship_start' => ['required', 'date'],
-            'internship_end' => ['required', 'date', 'after_or_equal:internship_start'],
-            'profile_photo' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'], // max size in kilobytes
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . auth()->id()],
+            'profile_photo' => ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:2048'],
         ];
     }
+    
 
     /**
      * Get the validation messages that apply to the request.

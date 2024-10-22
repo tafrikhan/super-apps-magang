@@ -1,54 +1,54 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Riwayat Absensi User')
+@section('title', 'Absensi')
+
+@section('header')
+    Absensi
+@endsection
 
 @section('content')
-<div class="container mt-4">
-    <h1>Riwayat Absensi User</h1>
+<body class="font-sans antialiased">
+    <div class="container mt-4">
+        <h1 class="mb-4">Riwayat Absensi User</h1>
+        
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <label for="min-date" class="form-label">Tanggal Mulai:</label>
+                <input type="date" id="min-date" class="form-control">
+            </div>
+            <div class="col-md-4">
+                <label for="max-date" class="form-label">Tanggal Akhir:</label>
+                <input type="date" id="max-date" class="form-control">
+            </div>
+        </div>
 
-    <div class="row mb-3">
-        <div class="col-md-3">
-            <label for="start_date" class="form-label">Tanggal Mulai</label>
-            <input type="date" id="start_date" class="form-control">
-        </div>
-        <div class="col-md-3">
-            <label for="end_date" class="form-label">Tanggal Akhir</label>
-            <input type="date" id="end_date" class="form-control">
-        </div>
-        <div class="col-md-3">
-            <label for="shift_filter" class="form-label">Shift</label>
-            <select id="shift_filter" class="form-select">
-                <option value="">Semua Shift</option>
-                <option value="pagi">Pagi</option>
-                <option value="sore">Sore</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="table-responsive text-nowrap">
-            <table class="table" id="attendanceTable">
-                <thead>
-                    <tr>
-                        <th>Nama Pengguna</th>
-                        <th>Tanggal</th>
-                        <th>Shift</th>
-                        <th>Masuk</th>
-                        <th>Pulang</th>
-                        <th>Lokasi</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody class="table-border-bottom-0">
-                    @foreach ($kehadirans as $kehadiran)
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Daftar Absensi</h5>
+            </div>
+            <div class="table-responsive text-nowrap">
+                <table id="attendance-table" class="table table-striped table-bordered nowrap" style="width:100%">
+                    <thead>
                         <tr>
-                            <td>{{ $kehadiran->user->name }}</td>
-                            <td>{{ $kehadiran->date }}</td>
-                            <td>{{ $kehadiran->shift }}</td>
-                            <td>{{ $kehadiran->check_in ?? '-' }}</td>
-                            <td>{{ $kehadiran->check_out ?? '-' }}</td>
-                            <td>{{ $kehadiran->location }}</td>
-                            <td>
+                            <th>Name</th>
+                            <th>Tanggal</th>
+                            <th>Shift</th>
+                            <th>Masuk</th>
+                            <th>Pulang</th>
+                            <th>Lokasi</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($kehadirans as $kehadiran)
+                        <tr>
+                            <td class="p-3">{{ $kehadiran->user->name }}</td>
+                            <td class="p-3">{{ $kehadiran->date }}</td>
+                            <td class="p-3">{{ $kehadiran->shift }}</td>
+                            <td class="p-3">{{ $kehadiran->check_in ?? '-' }}</td>
+                            <td class="p-3">{{ $kehadiran->check_out ?? '-' }}</td>
+                            <td class="p-3">{{ $kehadiran->location }}</td>
+                            <td class="p-3">
                                 <div class="dropdown">
                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                         <i class="bx bx-dots-vertical-rounded"></i>
@@ -61,48 +61,112 @@
                                                 <i class="bx bx-trash me-1"></i> Hapus
                                             </button>
                                         </form>
-                                        <a class="dropdown-item" href="javascript:void(0);">
-                                            <i class="bx bx-edit-alt me-1"></i> Edit
-                                        </a>
                                     </div>
                                 </div>
                             </td>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
-@endsection
 
-@section('scripts')
-<script>
-    $(document).ready(function () {
-        var table = $('#attendanceTable').DataTable({
-            "order": [[1, 'desc']],
-            "responsive": true
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/datetime/1.3.0/js/dataTables.dateTime.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.3.0/css/dataTables.dateTime.min.css">
+    
+    <script>
+        $(document).ready(function () {
+            var table = $('#attendance-table').DataTable();
+
+            var minDate, maxDate;
+
+            $('#min-date, #max-date').on('change', function () {
+                minDate = $('#min-date').val();
+                maxDate = $('#max-date').val();
+                table.draw();
+            });
+
+            $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+                var date = data[1];
+                if (
+                    (minDate === null || minDate === '' || date >= minDate) &&
+                    (maxDate === null || maxDate === '' || date <= maxDate)
+                ) {
+                    return true;
+                }
+                return false;
+            });
         });
+    </script>
 
-        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-            var minDate = $('#start_date').val();
-            var maxDate = $('#end_date').val();
-            var shift = $('#shift_filter').val();
-            var rowDate = data[1];
-            var rowShift = data[2];
+    <style>
+        .dataTables_filter {
+            display: flex;
+            align-items: center;
+        }
 
-            var withinDateRange = 
-                (minDate === '' || rowDate >= minDate) &&
-                (maxDate === '' || rowDate <= maxDate);
+        .dataTables_filter label {
+            margin-right: 10px;
+        }
 
-            var matchesShift = (shift === '' || rowShift === shift);
+        .dataTables_filter input {
+            margin-left: 5px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            transition: border-color 0.3s;
+        }
 
-            return withinDateRange && matchesShift;
-        });
+        .dataTables_filter input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
 
-        $('#start_date, #end_date, #shift_filter').on('change', function () {
-            table.draw();
-        });
-    });
-</script>
+        /* Gaya untuk elemen lainnya */
+        .dataTables_length, .dataTables_info, .dataTables_paginate {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .dataTables_length label,
+        .dataTables_info {
+            margin-right: 10px;
+        }
+
+        .dataTables_length select {
+            margin-left: 5px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            transition: border-color 0.3s;
+        }
+
+        .dataTables_paginate {
+            margin-top: 10px;
+        }
+
+        .dataTables_paginate .paginate_button {
+            margin: 0 2px;
+            padding: 10px; 
+            border-radius: 5px;
+            border: 1px solid #007bff;
+            background-color: #fff;
+            color: #007bff;
+        }
+
+        .dataTables_paginate .paginate_button.current {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .dataTables_paginate .paginate_button:hover {
+            background-color: #0056b3;
+            color: white;
+        }
+    </style>
+</body>
 @endsection
