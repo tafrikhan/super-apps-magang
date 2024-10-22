@@ -1,11 +1,16 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\InstansiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KehadiranController;
+use App\Http\Controllers\MentorController;
+
+Route::resource('instansi', InstansiController::class);
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/dashboard', function () {
@@ -17,16 +22,21 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/kehadiran', [KehadiranController::class, 'index'])->name('kehadirans.index');
+    Route::get('/admin/kehadiran', [KehadiranController::class, 'adminIndex'])->name('admin.kehadiran.adminIndex');
     Route::post('/kehadiran/checkin', [KehadiranController::class, 'checkIn'])->name('kehadirans.checkin');
     Route::post('/kehadiran/checkout/{id}', [KehadiranController::class, 'checkOut'])->name('kehadirans.checkout');
 });
 
 Route::middleware(['auth:admin'])->group(function () {
-    Route::get('/admin/kehadiran', [KehadiranController::class, 'adminIndex'])->name('admin.kehadiran.index');
+    Route::get('/admin/kehadirans', [KehadiranController::class, 'adminIndex'])->name('admin.kehadiran.index');
+    Route::delete('/kehadirans/{id}', [KehadiranController::class, 'destroy'])->name('kehadirans.destroy');
+
+    Route::resource('users', AdminUserController::class);
+    Route::get('/admin/instansi', [InstansiController::class, 'index'])->name('admin.instansi.index');
+    Route::get('/admin/mentors', [InstansiController::class, 'index'])->name('admin.mentors.index');
 });
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
-require __DIR__.'/admin-auth.php';
+require __DIR__ . '/admin-auth.php';
