@@ -21,7 +21,7 @@ class KehadiranController extends Controller
                 $kehadiran->check_out = $kehadiran->check_out ? Carbon::parse($kehadiran->check_out)->setTimezone('Asia/Jakarta') : null; // Ubah check_out juga
                 return $kehadiran;
             });
-    
+
         return view('kehadiran.index', compact('kehadirans'));
     }
 
@@ -69,5 +69,4 @@ class KehadiranController extends Controller
 
         return redirect()->back()->with('success', 'Kehadiran berhasil dihapus!');
     }
-
 }
