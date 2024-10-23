@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container">
-        <h1>Create User</h1>
+        <h1>Tambah Pengguna</h1>
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -58,7 +58,7 @@
                 <select class="form-select select2" id="mentor" name="mentor" required>
                     <option value="" disabled selected>Pilih Mentor</option>
                     @foreach ($mentors as $mentor)
-                        <option value="{{ $mentor->id }}">{{ $mentor->nama }}</option>
+                        <option value="{{ $mentor->id }}">{{ $mentor->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -78,19 +78,19 @@
             <!-- Password (auto fill) -->
 
             <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
+                <label for="password" class="form-label">Kata Sandi</label>
                 <input type="password" class="form-control" id="password" name="password" value="rumahmesin" readonly
                     required>
             </div>
 
             <div class="mb-3">
-                <label for="password_confirmation" class="form-label">Confirm Password</label>
+                <label for="password_confirmation" class="form-label">Konfirmasi Kata Sandi</label>
                 <input type="password" class="form-control" id="password_confirmation" name="password_confirmation"
                     value="rumahmesin" readonly required>
             </div>
 
-            <button type="submit" class="btn btn-primary">Create User</button>
-            <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+            <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">Batal</a>
         </form>
     </div>
 @endsection

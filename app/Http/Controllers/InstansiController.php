@@ -23,7 +23,7 @@ class InstansiController extends Controller
     {
         $request->validate(['nama_instansi' => 'required']);
         Instansi::create($request->all());
-        return redirect()->route('instansi.index')->with('success', 'Instansi berhasil ditambahkan.');
+        return redirect()->route('instansi.index')->with('success', 'Instansi berhasil ditambahkan!');
     }
 
     public function edit(Instansi $instansi)
@@ -35,12 +35,12 @@ class InstansiController extends Controller
     {
         $request->validate(['nama_instansi' => 'required']);
         $instansi->update($request->all());
-        return redirect()->route('instansi.index')->with('success', 'Instansi berhasil diupdate.');
+        return redirect()->route('instansi.index')->with('success', 'Instansi berhasil diperbarui!');
     }
 
     public function destroy(Instansi $instansi)
     {
         $instansi->delete();
-        return redirect()->route('instansi.index')->with('success', 'Instansi berhasil dihapus.');
+        return redirect()->route('instansi.index')->with('success', 'Instansi berhasil dihapus!');
     }
 }

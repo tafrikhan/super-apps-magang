@@ -58,14 +58,14 @@ class AdminProfileController extends Controller
 
         // Cek apakah password saat ini sesuai
         if (!\Hash::check($request->current_password, $admin->password)) {
-            return back()->withErrors(['current_password' => 'Password saat ini tidak sesuai.']);
+            return back()->withErrors(['current_password' => 'Kata Sandi saat ini tidak sesuai!']);
         }
 
         // Update password baru
         $admin->password = \Hash::make($request->new_password);
         $admin->save();
 
-        return redirect()->route('admin.profile.edit')->with('status', 'Password berhasil diperbarui.'); // Ganti dengan status yang sesuai
+        return redirect()->route('admin.profile.edit')->with('status', 'Kata Sandi berhasil diperbarui!'); // Ganti dengan status yang sesuai
     }
     
 
@@ -75,6 +75,6 @@ class AdminProfileController extends Controller
         $admin = auth()->user();
         $admin->delete();
 
-        return redirect()->route('login')->with('success', 'Akun Anda telah dihapus.');
+        return redirect()->route('login')->with('success', 'Akun Anda telah dihapus!');
     }
 }

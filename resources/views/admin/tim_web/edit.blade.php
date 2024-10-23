@@ -1,21 +1,38 @@
 @extends('admin.layouts.app')
 
-@section('content')
-    <h1>Edit Tim Web</h1>
+@section('title', 'Edit Tim Web')
 
-    <form action="{{ route('tim_web.update', $timweb->id) }}" method="POST">
+@section('content')
+<div class="container">
+    <h2>Edit Data Tim Web</h2>
+
+    <!-- Form Edit Tim Web -->
+    <form action="{{ route('tim_web.update', $tim_web->id) }}" method="POST">
         @csrf
         @method('PUT')
 
-        <label>Nama Tim:</label>
-        <input type="text" name="nama_tim" value="{{ $timweb->nama_tim }}" required>
+        <div class="mb-3">
+            <label for="jumlah_artikel" class="form-label">Jumlah Artikel</label>
+            <input type="number" name="jumlah_artikel" value="{{ $tim_web->jumlah_artikel }}" class="form-control" required>
+        </div>
 
-        <label>Jumlah Artikel:</label>
-        <input type="number" name="jumlah_artikel" value="{{ $timweb->jumlah_artikel }}" required>
+        <div class="mb-3">
+            <label for="jumlah_kata" class="form-label">Jumlah Kata</label>
+            <input type="number" name="jumlah_kata" value="{{ $tim_web->jumlah_kata }}" class="form-control" required>
+        </div>
 
-        <label>Jumlah Kata:</label>
-        <input type="number" name="jumlah_kata" value="{{ $timweb->jumlah_kata }}" required>
+        <div class="mb-3">
+            <label for="keterangan" class="form-label">Keterangan</label>
+            <textarea name="keterangan" class="form-control" required>{{ $tim_web->keterangan }}</textarea>
+        </div>
 
-        <button type="submit">Perbarui</button>
+        <div class="mb-3">
+            <label for="tanggal" class="form-label">Tanggal</label>
+            <input type="date" name="tanggal" value="{{ $tim_web->tanggal }}" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Simpan</button>
+        <a href="{{ route('tim_web.index') }}" class="btn btn-secondary">Batal</a>
     </form>
+</div>
 @endsection

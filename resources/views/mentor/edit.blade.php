@@ -28,7 +28,7 @@
 
         <div class="mb-3">
             <label for="nama" class="form-label">Nama</label>
-            <input type="text" class="form-control" id="nama" name="nama" value="{{ $mentor->nama }}" required>
+            <input type="text" class="form-control" id="nama" name="nama" value="{{ $mentor->name }}" required>
         </div>
 
         <div class="mb-3">
@@ -40,7 +40,8 @@
             </select>
         </div>
 
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="btn btn-primary">Perbarui</button>
+        <a href="{{ route('mentor.index') }}" class="btn btn-secondary">Batal</a>
     </form>
 </div>
 @endsection

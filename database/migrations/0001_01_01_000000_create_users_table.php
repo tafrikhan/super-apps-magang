@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -18,11 +19,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->string('gender')->nullable(); 
-            $table->string('school')->nullable(); 
-            $table->string('address')->nullable(); 
-            $table->date('internship_start')->nullable(); 
-            $table->date('internship_end')->nullable(); 
+            $table->date('start_date')->nullable(); 
+            $table->date('end_date')->nullable(); 
             $table->timestamps();
         });
 
@@ -40,6 +38,33 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
+
+        // Buat tabel instansis
+        Schema::create('instansis', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama_instansi');
+            $table->unsignedBigInteger('instansi_id')->nullable(); // Tambahkan kolom foreign key
+            $table->foreign('instansi_id')->references('id')->on('instansis')->onDelete('cascade'); // Definisikan relasi ke tabel 'instansi'
+            $table->timestamps();
+        });
+        // Buat tabel penugasans
+        Schema::create('penugasans', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama_unit_bisnis');
+            $table->unsignedBigInteger('penugasan_id')->nullable(); // Tambahkan kolom user_id sebagai foreign key
+            $table->foreign('penugasan_id')->references('id')->on('penugasans')->onDelete('cascade'); // Definisikan relasi ke tabel 'users'
+            $table->timestamps();
+        });
+        // Buat tabel mentors
+        Schema::create('mentors', function (Blueprint $table) {
+            $table->id();
+            $table->integer('nik');
+            $table->string('nama');
+            $table->string('jabatan');
+            $table->unsignedBigInteger('mentors_id')->unique();  // Kolom user_id sebagai foreign key dan pastikan unik untuk one-to-one
+            $table->foreign('mentors_id')->references('id')->on('mentors')->onDelete('cascade');  // Definisikan relasi ke tabel 'users'
+            $table->timestamps();
+        });
     }
 
     /**
@@ -47,8 +72,11 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
-        Schema::dropIfExists('password_reset_tokens');
+        Schema::dropIfExists('mentors');
+        Schema::dropIfExists('penugasans');
+        Schema::dropIfExists('instansis');
         Schema::dropIfExists('sessions');
+        Schema::dropIfExists('password_reset_tokens');
+        Schema::dropIfExists('users');
     }
 };

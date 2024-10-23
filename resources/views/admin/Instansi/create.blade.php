@@ -12,7 +12,7 @@
             <input type="text" id="nama_instansi" name="nama_instansi" class="form-control" required>
         </div>
         <button type="submit" class="btn btn-primary">Simpan</button>
-        <a href="{{ route('instansi.index') }}" class="btn btn-secondary">Kembali</a>
+        <a href="{{ route('instansi.index') }}" class="btn btn-secondary">Batal</a>
     </form>
 </div>
 @endsection

@@ -9,7 +9,7 @@
 @section('content')
 <body class="font-sans antialiased">
     <div class="container mt-4">
-        <h1 class="mb-4">Riwayat Absensi User</h1>
+        <h1 class="mb-4">Riwayat Absensi Pengguna</h1>
         
         <div class="row mb-4">
             <div class="col-md-4">
@@ -30,7 +30,7 @@
                 <table id="attendance-table" class="table table-striped table-bordered nowrap" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Name</th>
+                            <th>Nama</th>
                             <th>Tanggal</th>
                             <th>Shift</th>
                             <th>Masuk</th>

@@ -44,7 +44,7 @@ class PengajuanIzinUserController extends Controller
         $pengajuanIzin->status = 'disetujui';
         $pengajuanIzin->save();
 
-        return redirect()->back()->with('success', 'Pengajuan izin berhasil disetujui.');
+        return redirect()->back()->with('success', 'Pengajuan izin berhasil disetujui!');
     }
 
     public function reject(PengajuanIzin $pengajuanIzin)
@@ -52,6 +52,6 @@ class PengajuanIzinUserController extends Controller
         $pengajuanIzin->status = 'ditolak';
         $pengajuanIzin->save();
 
-        return redirect()->back()->with('success', 'Pengajuan izin berhasil ditolak.');
+        return redirect()->back()->with('success', 'Pengajuan izin berhasil ditolak!');
     }
 }

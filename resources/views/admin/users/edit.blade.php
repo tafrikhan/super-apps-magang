@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Edit User</h1>
+    <h1>Edit Pengguna</h1>
     
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -20,60 +20,79 @@
         @csrf
         @method('PUT')
 
-        <!-- Name Field -->
         <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $user->name) }}" required>
+            <label for="name" class="form-label">Nama</label>
+            <input type="text" class="form-control" id="name" name="name" required>
         </div>
 
-        <!-- Email Field -->
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" value="{{ old('email', $user->email) }}" required>
+            <input type="email" class="form-control" id="email" name="email" required>
         </div>
 
-        <!-- Jenis Kelamin Field -->
+        <!-- Dropdown Nama Instansi -->
         <div class="mb-3">
-            <label for="gender" class="form-label">Jenis Kelamin</label>
-            <select class="form-control" id="gender" name="gender" required>
-                <option value="Laki-laki" {{ old('gender', $user->gender) == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
-                <option value="Perempuan" {{ old('gender', $user->gender) == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+            <label for="instansi" class="form-label">Nama Instansi</label>
+            <select class="form-control select2" id="instansi" name="instansi" required>
+                <option value="" disabled selected>Pilih Instansi</option>
+                @foreach ($instansis as $instansi)
+                    <option value="{{ $instansi->id }}">{{ $instansi->nama_instansi }}</option>
+                @endforeach
             </select>
         </div>
 
-        <!-- Sekolah Field -->
+        <!-- Dropdown Penugasan -->
         <div class="mb-3">
-            <label for="school" class="form-label">Sekolah</label>
-            <input type="text" class="form-control" id="school" name="school" value="{{ old('school', $user->school) }}" required>
+            <label for="penugasan" class="form-label">Pilih Penugasan</label>
+            <select class="form-select select2" id="penugasan" name="penugasan" required>
+                <option value="" disabled selected>Pilih Penugasan</option>
+                @foreach ($penugasans as $penugasan)
+                    <option value="{{ $penugasan->id }}">{{ $penugasan->nama_unit_bisnis }}</option>
+                @endforeach
+            </select>
         </div>
 
-        <!-- Tanggal Mulai Magang Field -->
+
+        <!-- Dropdown Mentor -->
         <div class="mb-3">
-            <label for="start_internship" class="form-label">Tanggal Mulai Magang</label>
-            <input type="date" class="form-control" id="start_internship" name="start_internship" value="{{ old('start_internship', $user->start_internship) }}" required>
+            <label for="mentor" class="form-label">Pilih Mentor</label>
+            <select class="form-select select2" id="mentor" name="mentor" required>
+                <option value="" disabled selected>Pilih Mentor</option>
+                @foreach ($mentors as $mentor)
+                    <option value="{{ $mentor->id }}">{{ $mentor->nama }}</option>
+                @endforeach
+            </select>
         </div>
 
-        <!-- Tanggal Selesai Magang Field -->
+        <!-- Tanggal Mulai -->
         <div class="mb-3">
-            <label for="end_internship" class="form-label">Tanggal Selesai Magang</label>
-            <input type="date" class="form-control" id="end_internship" name="end_internship" value="{{ old('end_internship', $user->end_internship) }}" required>
+            <label for="start_date" class="form-label">Tanggal Mulai</label>
+            <input type="date" class="form-control" id="start_date" name="start_date" required>
         </div>
 
-        <!-- Password Field -->
+        <!-- Tanggal Selesai -->
         <div class="mb-3">
-            <label for="password" class="form-label">Password (leave blank to keep current password)</label>
-            <input type="password" class="form-control" id="password" name="password">
+            <label for="end_date" class="form-label">Tanggal Selesai</label>
+            <input type="date" class="form-control" id="end_date" name="end_date" required>
         </div>
 
-        <!-- Confirm Password Field -->
+        <!-- Password (auto fill) -->
+
         <div class="mb-3">
-            <label for="password_confirmation" class="form-label">Confirm Password</label>
-            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
+            <label for="password" class="form-label">Kata Sandi</label>
+            <input type="password" class="form-control" id="password" name="password" value="rumahmesin" readonly
+                required>
+        </div>
+
+        <div class="mb-3">
+            <label for="password_confirmation" class="form-label">Konfirmasi Kata Sandi</label>
+            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation"
+                value="rumahmesin" readonly required>
         </div>
 
         <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary">Update User</button>
-        <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-primary">Perbarui</button>
+        <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">Batal</a>
     </form>
 </div>
 @endsection

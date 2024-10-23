@@ -48,7 +48,7 @@ class PengajuanIzinController extends Controller
             'keterangan' => $request->keterangan,
         ]);
 
-        return redirect()->route('pengajuan_izin.index')->with('success', 'Pengajuan izin berhasil diajukan.');
+        return redirect()->route('pengajuan_izin.index')->with('success', 'Pengajuan izin berhasil diajukan!');
     }   
 
 }

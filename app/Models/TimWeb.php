@@ -2,17 +2,19 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class TimWeb extends Model
 {
-    protected $table = 'timweb';
+    use HasFactory;
 
-    protected $fillable = ['nama_tim', 'jumlah_artikel', 'jumlah_kata'];
+    protected $table = 'tim_web';
 
-    // Menambah scope untuk filter artikel yang dibuat hari ini
-    public function scopeToday($query)
-    {
-        return $query->whereDate('created_at', now());
-    }
+    protected $fillable = [
+        'jumlah_artikel', 
+        'jumlah_kata', 
+        'keterangan',
+        'tanggal',
+    ];
 }

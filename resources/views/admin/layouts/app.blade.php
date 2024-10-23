@@ -51,22 +51,21 @@
 
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                 <div class="app-brand demo">
-                    <a href="index.html" class="app-brand-link">
+                    <a href="{{ route('admin.dashboard') }}" class="app-brand-link">
                         <span class="app-brand-logo demo">
                             <img src="{{ asset('assets/img/logo/logo-rumah-mesin.png') }}" alt="App Logo"
                                 style="width: 50px; height: auto;" />
                         </span>
                         <span class="app-brand-text demo menu-text fw-bolder ms-2">Super Apps</span>
                     </a>
-
-                    <a href="javascript:void(0);"
-                        class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+            
+                    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
                         <i class="bx bx-chevron-left bx-sm align-middle"></i>
                     </a>
                 </div>
-
+            
                 <div class="menu-inner-shadow"></div>
-
+            
                 <ul class="menu-inner py-1">
                     <!-- Dashboard -->
                     <li class="menu-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
@@ -75,59 +74,95 @@
                             <div data-i18n="Analytics">Halaman Utama</div>
                         </a>
                     </li>
-
+            
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Pages</span>
                     </li>
+            
+                    <!-- Absensi Pengguna -->
                     <li class="menu-item {{ request()->routeIs('admin.kehadiran.index') ? 'active' : '' }}">
                         <a href="{{ route('admin.kehadiran.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-task"></i>
                             <div data-i18n="Tables">Absensi Pengguna</div>
                         </a>
                     </li>
-                    <li class="menu-item {{ request()->routeIs('admPenggunas.index') ? 'active' : '' }}">
+            
+                    <!-- Manajemen Pengguna -->
+                    <li class="menu-item {{ request()->routeIs('admin.users.index') ? 'active' : '' }}">
                         <a href="{{ route('admin.users.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-group"></i>
                             <div data-i18n="Tables">Manajemen Pengguna</div>
                         </a>
                     </li>
+            
+                    <!-- Instansi -->
                     <li class="menu-item {{ request()->routeIs('instansi.index') ? 'active' : '' }}">
                         <a href="{{ route('instansi.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-building"></i>
                             <div data-i18n="Tables">Instansi</div>
                         </a>
                     </li>
+            
+                    <!-- Penugasan -->
                     <li class="menu-item {{ request()->routeIs('penugasan.index') ? 'active' : '' }}">
                         <a href="{{ route('penugasan.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-book-content"></i>
                             <div data-i18n="Tables">Penugasan</div>
                         </a>
                     </li>
-                    
-                    <li class="menu-item {{ request()->routeIs('tim_web.index') ? 'active' : '' }}">
-                    <a href="{{ route('tim_web.index') }}" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-group"></i>
-                        <div data-i18n="Tables">Tim Web</div>
-                    </a>
-                </li>
+            
+                    <!-- Laporan Harian -->
+                    <li class="menu-item {{ request()->routeIs('tim_web.*') || request()->routeIs('tim_sosmed.*') ? 'open' : '' }}">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-folder"></i>
+                            <div data-i18n="Laporan Harian">Laporan Harian</div>
+                        </a>
+                        <ul class="menu-sub">
+                            <!-- Tim Web -->
+                            <li class="menu-item {{ request()->routeIs('tim_web.index') ? 'active' : '' }}">
+                                <a href="{{ route('tim_web.index') }}" class="menu-link">
+                                    <i class="menu-icon tf-icons bx bx-book-content"></i>
+                                    <div data-i18n="Tim Web">Tim Web</div>
+                                </a>
+                            </li>
+                            <!-- Tim Sosmed -->
+                            <li class="menu-item {{ request()->routeIs('tim_sosmed.index') ? 'active' : '' }}">
+                                <a href="{{ route('tim_sosmed.index') }}" class="menu-link">
+                                    <i class="menu-icon tf-icons bx bx-book-content"></i>
+                                    <div data-i18n="Tim Sosmed">Tim Sosmed</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
 
-                    <li class="menu-item {{ request()->routeIs('mentors.index') ? 'active' : '' }}">
+                    <!-- Mentor -->
+                    <li class="menu-item {{ request()->routeIs('mentor.index') ? 'active' : '' }}">
                         <a href="{{ route('mentors.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-user"></i>
                             <div data-i18n="Tables">Mentor</div>
                         </a>
-                    <li class="menu-item {{ request()->is('pengajuan-izin') ? 'active' : '' }}">
+                    </li>
+            
+                    <!-- Pengajuan Izin -->
+                    <li class="menu-item {{ request()->routeIs('pengajuan_izin.index') ? 'active' : '' }}">
                         <a href="{{ route('pengajuan_izin.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-user-check"></i>
                             <div data-i18n="Pengajuan Izin">Kelola Pengajuan Izin</div>
                         </a>
                     </li>
+            
+                    <!-- Feedback -->
+                    <li class="menu-item {{ request()->routeIs('feedback.admin') ? 'active' : '' }}">
+                        <a href="{{ route('feedback.admin') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-message-square-dots"></i>
+                            <div>Masukan</div>
+                        </a>
+                    </li>
                 </ul>
-                <!-- Misc -->
+            
+                <!-- Logout -->
                 <div class="logout-container py-2">
-                    <a href="#"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                        class="menu-link d-flex align-items-center">
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-power-off"></i>
                         <div data-i18n="Logout" class="ms-2">Keluar</div>
                     </a>
@@ -135,9 +170,7 @@
                         @csrf
                     </form>
                 </div>
-
             </aside>
-
             <!-- / Menu -->
 
             <!-- Layout container -->

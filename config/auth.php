@@ -45,6 +45,11 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
+
+        'mentor' => [
+            'driver' => 'session',
+            'provider' => 'mentors',
+        ],
     ],
 
     /*
@@ -73,6 +78,11 @@ return [
         'admins' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\Admin::class),
+        ],
+
+        'mentors' => [
+            'driver' => 'eloquent',
+            'model' => env('AUTH_MODEL', App\Models\Mentor::class),
         ],
 
         // 'users' => [

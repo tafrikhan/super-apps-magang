@@ -11,18 +11,22 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('mentors', function (Blueprint $table) {
+        Schema::create('feedbacks', function (Blueprint $table) {
             $table->id();
-            $table->string('nik')->unique();
-            $table->string('nama');
-            $table->enum('jabatan', ['Manajer', 'SPV', 'Staff']);
+            $table->string('name');
+            $table->string('email');
+            $table->text('message');
             $table->timestamps();
         });
     }
     
-    public function down()
-    {
-        Schema::dropIfExists('mentors');
-    }
     
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('feedbacks');
+    }
 };

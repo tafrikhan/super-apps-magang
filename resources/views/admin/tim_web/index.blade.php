@@ -1,50 +1,51 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Data Tim Web')
+@section('title', 'Daftar Tim Web')
 
 @section('content')
 <div class="container">
     <h2>Data Tim Web</h2>
+
+    <!-- Tampilkan jumlah artikel dan jumlah kata hari ini -->
+    <div class="alert alert-info">
+        <strong>Jumlah Artikel Hari Ini:</strong> {{ $jumlahArtikel }} <br>
+        <strong>Jumlah Kata Hari Ini:</strong> {{ $jumlahKata }}
+    </div>
+
+    <!-- Tombol tambah data -->
+    <a href="{{ route('tim_web.create') }}" class="btn btn-primary mb-3">Tambah Data Tim Web</a>
     
-    <!-- Tampilkan pesan sukses -->
+    <!-- Notifikasi sukses -->
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <!-- Tambahkan link untuk menambah Tim baru -->
-    <a href="{{ route('tim_web.create') }}" class="btn btn-primary mb-3">Tambah Tim</a>
-
-    <!-- Menampilkan jumlah artikel dan kata hari ini -->
-    <div class="mb-3">
-        <p><strong>Jumlah Artikel Hari Ini:</strong> {{ $jumlahArtikelHariIni }}</p>
-        <p><strong>Total Kata Hari Ini:</strong> {{ $totalKataHariIni }}</p>
-    </div>
-
-    <!-- Tabel Tim Web -->
-    <table class="table table-bordered table-striped">
+    <!-- Tabel daftar tim web -->
+    <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Nama Tim</th>
-                <th>Jumlah Artikel</th>
-                <th>Jumlah Kata</th>
+                <th>No</th>
+                <th>Jumlah Artikel Hari Ini</th>
+                <th>Jumlah Kata Hari Ini</th>
+                <th>Keterangan</th>
+                <th>Tanggal</th> <!-- Tambahkan kolom tanggal -->
                 <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($timwebs as $timweb)
+            @foreach ($tim_webs as $tim_web)
             <tr>
-                <td>{{ $timweb->nama_tim }}</td>
-                <td>{{ $timweb->jumlah_artikel }}</td>
-                <td>{{ $timweb->jumlah_kata }}</td>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $tim_web->jumlah_artikel }}</td>
+                <td>{{ $tim_web->jumlah_kata }}</td>
+                <td>{{ $tim_web->keterangan }}</td>
+                <td>{{ $tim_web->tanggal }}</td> <!-- Tampilkan data tanggal -->
                 <td>
-                    <!-- Tombol Edit -->
-                    <a href="{{ route('tim_web.edit', $timweb->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                    
-                    <!-- Tombol Hapus -->
-                    <form action="{{ route('tim_web.destroy', $timweb->id) }}" method="POST" class="d-inline">
+                    <a href="{{ route('tim_web.edit', $tim_web->id) }}" class="btn btn-warning">Edit</a>
+                    <form action="{{ route('tim_web.destroy', $tim_web->id) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus tim ini?')">Hapus</button>
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
                     </form>
                 </td>
             </tr>

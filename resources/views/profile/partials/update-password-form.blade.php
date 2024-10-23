@@ -59,7 +59,7 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary w-100 mt-3">Save</button>
+        <button type="submit" class="btn btn-primary w-100 mt-3">Simpan Perubahan</button>
 
         @if (session('status') === 'password-updated')
             <div class="alert alert-success mt-3" style="background-color: #d4edda; color: #155724;">

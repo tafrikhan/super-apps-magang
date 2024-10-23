@@ -115,6 +115,15 @@
                     <div>Pengajuan Izin</div>
                 </a>
             </li>
+            <!-- Feedback -->
+            <li class="menu-item {{ request()->is('feedback') ? 'active' : '' }}">
+              <a href="{{ route('feedback.index') }}" class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-message-square-dots"></i> <!-- Ikon Komentar -->
+                  <div>Feedback</div>
+              </a>
+          </li>
+          
+
             
               {{-- <!-- Misc -->
               <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>

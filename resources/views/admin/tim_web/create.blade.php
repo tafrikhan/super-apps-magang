@@ -4,33 +4,34 @@
 
 @section('content')
 <div class="container">
-    <h2>Tambah Tim Web</h2>
+    <h2>Tambah Data Tim Web</h2>
 
     <!-- Form Tambah Tim Web -->
     <form action="{{ route('tim_web.store') }}" method="POST">
         @csrf
 
-        <!-- Nama Tim -->
         <div class="mb-3">
-            <label for="nama_tim" class="form-label">Nama Tim:</label>
-            <input type="text" id="nama_tim" name="nama_tim" class="form-control" required>
+            <label for="jumlah_artikel" class="form-label">Jumlah Artikel</label>
+            <input type="number" name="jumlah_artikel" class="form-control" required>
         </div>
 
-        <!-- Jumlah Artikel -->
         <div class="mb-3">
-            <label for="jumlah_artikel" class="form-label">Jumlah Artikel:</label>
-            <input type="number" id="jumlah_artikel" name="jumlah_artikel" class="form-control" required>
+            <label for="jumlah_kata" class="form-label">Jumlah Kata</label>
+            <input type="number" name="jumlah_kata" class="form-control" required>
         </div>
 
-        <!-- Jumlah Kata -->
         <div class="mb-3">
-            <label for="jumlah_kata" class="form-label">Jumlah Kata:</label>
-            <input type="number" id="jumlah_kata" name="jumlah_kata" class="form-control" required>
+            <label for="keterangan" class="form-label">Keterangan</label>
+            <textarea name="keterangan" class="form-control" required></textarea>
         </div>
 
-        <!-- Tombol Simpan -->
-        <button type="submit" class="btn btn-success">Simpan</button>
-        <a href="{{ route('tim_web.index') }}" class="btn btn-secondary">Kembali</a>
+        <div class="mb-3">
+            <label for="tanggal" class="form-label">Tanggal</label>
+            <input type="date" name="tanggal" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Simpan</button>
+        <a href="{{ route('tim_web.index') }}" class="btn btn-secondary">Batal</a>
     </form>
 </div>
 @endsection

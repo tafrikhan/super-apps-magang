@@ -12,8 +12,8 @@
             <label for="nama_instansi" class="form-label">Nama Instansi:</label>
             <input type="text" id="nama_instansi" name="nama_instansi" value="{{ $instansi->nama_instansi }}" class="form-control" required>
         </div>
-        <button type="submit" class="btn btn-primary">Update</button>
-        <a href="{{ route('instansi.index') }}" class="btn btn-secondary">Kembali</a>
+        <button type="submit" class="btn btn-primary">Perbarui</button>
+        <a href="{{ route('instansi.index') }}" class="btn btn-secondary">Batal</a>
     </form>
 </div>
 @endsection

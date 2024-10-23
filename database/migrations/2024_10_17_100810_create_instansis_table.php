@@ -8,12 +8,15 @@ class CreateInstansisTable extends Migration
 {
     public function up()
     {
-        Schema::create('instansis', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama_instansi');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('instansis')) {
+            Schema::create('instansis', function (Blueprint $table) {
+                $table->id();
+                $table->string('nama_instansi');
+                $table->timestamps();
+            });
+        }
     }
+    
 
     public function down()
     {
