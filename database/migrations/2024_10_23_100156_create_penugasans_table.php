@@ -4,19 +4,19 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInstansisTable extends Migration
+class CreatePenugasansTable extends Migration
 {
     public function up()
     {
-        Schema::create('instansis', function (Blueprint $table) {
+        Schema::create('penugasans', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_instansi');
+            $table->string('nama_unit_bisnis');
             $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('instansis');
+        Schema::dropIfExists('penugasans');
     }
 };

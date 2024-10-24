@@ -33,7 +33,8 @@ Route::middleware(['auth:admin'])->group(function () {
 
     Route::resource('users', AdminUserController::class);
     Route::get('/admin/instansi', [InstansiController::class, 'index'])->name('admin.instansi.index');
-    Route::get('/admin/mentors', [InstansiController::class, 'index'])->name('admin.mentors.index');
+    Route::get('/admin/mentor', [MentorController::class, 'index'])->name('admin.mentors.index');
+    Route::get('/admin/mentor/create', [MentorController::class, 'index'])->name('admin.mentors.create');
 });
 
 

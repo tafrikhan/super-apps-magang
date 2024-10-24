@@ -10,7 +10,8 @@ class CreateKehadiransTable extends Migration
     {
         Schema::create('kehadirans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Foreign key ke users
+            $table->unsignedBigInteger('user_id'); // Pastikan menggunakan unsignedBigInteger
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('shift'); // Shift: Pagi atau Sore
             $table->date('date'); // Tanggal absen
             $table->time('check_in')->nullable(); // Waktu masuk
@@ -24,4 +25,4 @@ class CreateKehadiransTable extends Migration
     {
         Schema::dropIfExists('kehadirans');
     }
-}
+};
