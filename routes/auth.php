@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\PengajuanIzinController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KehadiranController;
 
@@ -61,4 +62,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/kehadiran', [KehadiranController::class, 'index'])->name('kehadirans.index');
     Route::post('/kehadiran/checkin', [KehadiranController::class, 'checkIn'])->name('kehadirans.checkin');
     Route::post('/kehadiran/checkout/{id}', [KehadiranController::class, 'checkOut'])->name('kehadirans.checkout');
+
+    Route::resource('pengajuan_izin', PengajuanIzinController::class);
+    Route::get('/pengajuan-izin', [PengajuanIzinController::class, 'index'])->name('pengajuan_izin.index');
+    Route::get('/pengajuan-izin/create', [PengajuanIzinController::class, 'create'])->name('pengajuan_izin.create');
+    Route::post('/pengajuan-izin', [PengajuanIzinController::class, 'store'])->name('pengajuan_izin.store');
 });

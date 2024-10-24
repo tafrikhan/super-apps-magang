@@ -9,7 +9,7 @@
                         <div class="card z-index-0 shadow-lg border-0 fadeIn3 fadeInBottom" style="border-radius: 15px;">
                             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                                 <div class="bg-danger shadow-info border-radius-lg py-4">
-                                    <h4 class="text-white font-weight-bold text-center mt-2">Page Register User</h4>
+                                    <h4 class="text-white font-weight-bold text-center mt-2"> Halaman Daftar </h4>
                                 </div>
                             </div>
                             <div class="card-body px-5">
@@ -21,7 +21,7 @@
                                         <div class="col-12">
                                             <div class="form-floating">
                                                 <x-text-input id="name" class="form-control" type="text" name="name" :value="old('name')" required autofocus placeholder="John Doe" />
-                                                <label for="name">Name</label>
+                                                <label for="name">Nama</label>
                                                 <x-input-error :messages="$errors->get('name')" class="mt-2" />
                                             </div>
                                         </div>
@@ -40,25 +40,25 @@
 
                                     <div class="form-floating mb-4">
                                         <x-text-input id="password" class="form-control" type="password" name="password" required placeholder="Password" />
-                                        <label for="password">Password</label>
+                                        <label for="password">Kata Sandi</label>
                                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
                                     </div>
 
                                     <div class="form-floating mb-4">
                                         <x-text-input id="password_confirmation" class="form-control" type="password" name="password_confirmation" required placeholder="Confirm Password" />
-                                        <label for="password_confirmation">Confirm Password</label>
+                                        <label for="password_confirmation">Konfirmasi Kata Sandi</label>
                                         <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                                     </div>
 
                                     <div class="text-center">
                                         <x-primary-button class="btn bg-danger w-100 py-2 mb-3" style="border-radius: 10px; font-weight: 500;">
-                                            {{ __('Register') }}
+                                            {{ __('Daftar') }}
                                         </x-primary-button>
                                     </div>
 
                                     <p class="mt-3 text-sm text-center">
-                                        Already registered?
-                                        <a href="{{ route('login') }}" class="text-danger font-weight-bold">Login</a>
+                                        Sudah terdaftar?
+                                        <a href="{{ route('login') }}" class="text-danger font-weight-bold">Masuk</a>
                                     </p>
                                 </form>
                             </div>

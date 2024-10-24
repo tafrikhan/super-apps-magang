@@ -2209,7 +2209,7 @@ progress {
   background-color: #fff;
   border-color: rgba(249, 249, 255, 0.54);
   outline: 0;
-  box-shadow: 0 0 0.25rem 0.05rem rgba(105, 108, 255, 0.1);
+  box-shadow: 0 0 0.25rem 0.05rem rgba(255, 105, 105, 0.1);
 }
 .form-control::-webkit-date-and-time-value {
   height: 1.53em;
@@ -2385,7 +2385,7 @@ textarea.form-control-lg {
 .form-select:focus {
   border-color: rgba(249, 249, 255, 0.54);
   outline: 0;
-  box-shadow: 0 0 0.25rem 0.05rem rgba(105, 108, 255, 0.1);
+  box-shadow: 0 0 0.25rem 0.05rem rgba(255, 105, 105, 0.1);
 }
 .form-select[multiple], .form-select[size]:not([size="1"]) {
   padding-right: 0.875rem;
@@ -2455,7 +2455,7 @@ textarea.form-control-lg {
 .form-check-input:focus {
   border-color: rgba(249, 249, 255, 0.54);
   outline: 0;
-  box-shadow: 0 0 0.25rem 0.05rem rgba(105, 108, 255, 0.1);
+  box-shadow: 0 0 0.25rem 0.05rem rgba(255, 105, 105, 0.1);
 }
 .form-check-input:checked {
   background-color: rgba(105, 108, 255, 0.08);
@@ -7680,7 +7680,7 @@ button:focus {
 }
 
 .input-group:focus-within {
-  box-shadow: 0 0 0.25rem 0.05rem rgba(105, 108, 255, 0.1);
+  box-shadow: 0 0 0.25rem 0.05rem rgba(255, 105, 105, 0.1);
 }
 .input-group:focus-within .form-control,
 .input-group:focus-within .input-group-text {

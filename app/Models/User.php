@@ -2,14 +2,12 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
     /**
@@ -21,12 +19,12 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'gender', 
-        'address', 
-        'school', 
-        'internship_start', 
-        'internship_end',
         'profile_photo',
+        'instansi_id',
+        'penugasan_id', // Kolom untuk relasi ke penugasan
+        'mentor_id',
+        'start_date',
+        'end_date',
     ];
 
     /**
@@ -44,11 +42,32 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
-    protected function casts(): array
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
+
+    /**
+     * Define the relationship to the Instansi model.
+     */
+    public function instansi()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->belongsTo(Instansi::class, 'instansi_id'); // 'instansi_id' adalah foreign key
+    }
+
+    /**
+     * Define the relationship to the Penugasan model.
+     */
+    public function penugasan()
+    {
+        return $this->belongsTo(Penugasan::class, 'penugasan_id'); // 'penugasan_id' adalah foreign key di tabel 'users'
+    }
+
+    /**
+     * Define the relationship to the Mentor model.
+     */
+    public function mentor()
+    {
+        return $this->belongsTo(Mentor::class, 'mentor_id'); // 'mentor_id' adalah foreign key di tabel 'users'
     }
 }

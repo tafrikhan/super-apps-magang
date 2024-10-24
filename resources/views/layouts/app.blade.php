@@ -1,17 +1,4 @@
 <!DOCTYPE html>
-
-<!-- =========================================================
-* Sneat - Bootstrap 5 HTML Admin Template - Pro | v1.0.0
-==============================================================
-
-* Product Page: https://themeselection.com/products/sneat-bootstrap-html-admin-template/
-* Created by: ThemeSelection
-* License: You must have a valid license purchased in order to legally use the theme for your project.
-* Copyright ThemeSelection (https://themeselection.com)
-
-=========================================================
- -->
-<!-- beautify ignore:start -->
 <html
   lang="en"
   class="light-style layout-menu-fixed"
@@ -67,6 +54,8 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="assets/js/config.js"></script>
+
+    <script src="{{ asset('assets/js/dropdown.js') }}"></script>
   </head>
 
   <body>
@@ -98,7 +87,7 @@
               <li class="menu-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                   <a href="{{ route('dashboard') }}" class="menu-link">
                       <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                      <div data-i18n="Analytics">Dashboard</div>
+                      <div data-i18n="Analytics">Halaman Utama</div>
                   </a>
               </li>
       
@@ -107,7 +96,7 @@
               <li class="menu-item {{ request()->routeIs('kehadirans.index') ? 'active' : '' }}">
                   <a href="{{ route('kehadirans.index') }}" class="menu-link">
                       <i class="menu-icon tf-icons bx bx-task"></i>
-                      <div data-i18n="Tables">Absen</div>
+                      <div data-i18n="Tables">Absensi</div>
                   </a>
               </li>
       
@@ -115,31 +104,46 @@
               <li class="menu-item {{ request()->is('profile') ? 'active' : '' }}">
                   <a href="{{ route('profile.update') }}" class="menu-link">
                       <i class="menu-icon tf-icons bx bx-user"></i>
-                      <div data-i18n="Tables">Profile Settings</div>
+                      <div data-i18n="Tables">Pengaturan Profil</div>
                   </a>
               </li>
-      
-              <!-- Misc -->
+
+              <!-- Pengajuan izin -->
+              <li class="menu-item {{ request()->is('pengajuan-izin') ? 'active' : '' }}">
+                <a href="pengajuan-izin" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-user"></i>
+                    <div>Pengajuan Izin</div>
+                </a>
+            </li>
+            <!-- Feedback -->
+            <li class="menu-item {{ request()->is('feedback') ? 'active' : '' }}">
+              <a href="{{ route('feedback.index') }}" class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-message-square-dots"></i> <!-- Ikon Komentar -->
+                  <div>Feedback</div>
+              </a>
+          </li>
+          
+
+            
+              {{-- <!-- Misc -->
               <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
               <li class="menu-item">
                   <a href="https://github.com/anakbangkok/super-apps-magang/issues" target="_blank" class="menu-link">
                       <i class="menu-icon tf-icons bx bx-support"></i>
-                      <div data-i18n="Support">Support</div>
+                      <div data-i18n="Support">Dukungan</div>
                   </a>
-              </li>
-      
-              <li class="menu-item">
-                  <a href="#" 
-                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();" 
-                     class="menu-link d-flex align-items-center">
-                      <i class="menu-icon tf-icons bx bx-power-off"></i>
-                      <div data-i18n="Logout" class="ms-2">Logout</div>
-                  </a>
-                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                      @csrf
-                  </form>
-              </li>
+              </li> --}}
           </ul>
+          <!-- Misc -->
+          <div class="logout-container py-2">
+            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="menu-link d-flex align-items-center">
+                <i class="menu-icon tf-icons bx bx-power-off"></i>
+                <div data-i18n="Logout" class="ms-2">Keluar</div>
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
+          </div>
       </aside>
       
       
@@ -161,19 +165,19 @@
             </div>
 
             <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-              <!-- Search -->
+              <!-- Cari -->
               <div class="navbar-nav align-items-center">
                 <div class="nav-item d-flex align-items-center">
                   <i class="bx bx-search fs-4 lh-0"></i>
                   <input
                     type="text"
                     class="form-control border-0 shadow-none"
-                    placeholder="Search..."
-                    aria-label="Search..."
+                    placeholder="Cari..."
+                    aria-label="Cari..."
                   />
                 </div>
               </div>
-              <!-- /Search -->
+              <!-- /Cari -->
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">
                 <!-- User -->
@@ -205,20 +209,20 @@
                     <li>
                       <div class="dropdown-divider"></div>
                     </li>
-                    <li>
+                    <!-- <li>
                       <a class="dropdown-item" href="{{ route('profile.edit') }}">
                         <i class="bx bx-user me-2"></i>
                         <span class="align-middle">My Profile</span>
                       </a>
-                    </li>
-                    <li>
+                    </li> -->
+                    <!-- <li>
                       <div class="dropdown-divider"></div>
                     </li>
-                    <li>
+                    <li> -->
                         <a class="dropdown-item" href="#" 
                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <i class="bx bx-power-off me-2"></i>
-                            <span class="align-middle">Log Out</span>
+                            <span class="align-middle">Keluar</span>
                         </a>
                     </li>
                     
@@ -254,41 +258,6 @@
     </div>
     <!-- / Layout wrapper -->
 
-    @section('scripts')
-    <script>
-        $(document).ready(function () {
-            var table = $('#attendanceTable').DataTable({
-                "order": [[1, 'desc']], // Order by date column (second column)
-                "responsive": true // Enable responsive table
-            });
-
-            // Custom search filter: Date Range and Shift
-            $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-                var minDate = $('#start_date').val();
-                var maxDate = $('#end_date').val();
-                var shift = $('#shift_filter').val();
-                var rowDate = data[1]; // Tanggal (Date) column index
-                var rowShift = data[2]; // Shift column index
-
-                // Check if date is within range
-                var withinDateRange = 
-                    (minDate === '' || rowDate >= minDate) &&
-                    (maxDate === '' || rowDate <= maxDate);
-
-                // Check if shift matches
-                var matchesShift = (shift === '' || rowShift === shift);
-
-                return withinDateRange && matchesShift;
-            });
-
-            // Redraw table on filter change
-            $('#start_date, #end_date, #shift_filter').on('change', function () {
-                table.draw();
-            });
-        });
-    </script>
-    @endsection
-
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     <script src="assets/vendor/libs/jquery/jquery.js"></script>
@@ -313,5 +282,41 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <style>
+  .menu-item.active .menu-link {
+    background-color: #007bff; /* Change this to your desired color */
+    color: #ffffff; /* Text color */
+  }
+
+  .menu-item.active .menu-icon {
+      color: #F4473A; /* Change icon color when active */
+  }
+
+  .logout-container {
+    border-top: 1px solid #ddd; /* Optional: add a top border for separation */
+    padding: 1rem; /* Add padding for spacing */
+    margin-top: auto; /* Push the logout button to the bottom */
+}
+
+.logout-container .menu-link {
+    color: #f00; /* Change the color of the logout link */
+}
+
+.logout-container .menu-icon {
+    color: #f00; /* Change icon color */
+}
+
+    </style>
+    <!-- Select2 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Inisialisasi Select2
+            $('.select2').select2({
+                placeholder: "Pilih Penugasan", // Placeholder jika ingin ditambahkan
+                allowClear: true // Memungkinkan user untuk menghapus pilihan
+            });
+        });
+    </script>
   </body>
 </html>

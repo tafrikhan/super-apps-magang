@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container">
-        <h1>Create User</h1>
+        <h1>Tambah Pengguna</h1>
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -20,7 +20,7 @@
             @csrf
 
             <div class="mb-3">
-                <label for="name" class="form-label">Name</label>
+                <label for="name" class="form-label">Nama</label>
                 <input type="text" class="form-control" id="name" name="name" required>
             </div>
 
@@ -33,30 +33,33 @@
             <div class="mb-3">
                 <label for="instansi" class="form-label">Nama Instansi</label>
                 <select class="form-control select2" id="instansi" name="instansi" required>
-                    <option value="SMK 2 Magelang">SMK 2 Magelang</option>
-                    <option value="SMK 3 Bantul">SMK 3 Bantul</option>
-                    <option value="Universitas Amikom Yogyakarta">Universitas Amikom Yogyakarta</option>
+                    <option value="" disabled selected>Pilih Instansi</option>
+                    @foreach ($instansis as $instansi)
+                        <option value="{{ $instansi->id }}">{{ $instansi->nama_instansi }}</option>
+                    @endforeach
                 </select>
             </div>
 
             <!-- Dropdown Penugasan -->
             <div class="mb-3">
-                <label for="penugasan" class="form-label">Penugasan</label>
-                <select class="form-control select2" id="penugasan" name="penugasan" required>
-                    <option value="Jacoid">Jacoid</option>
-                    <option value="Punca Apparel">Punca Apparel</option>
-                    <option value="Rumah Sabut">Rumah Sabut</option>
+                <label for="penugasan" class="form-label">Pilih Penugasan</label>
+                <select class="form-select select2" id="penugasan" name="penugasan" required>
+                    <option value="" disabled selected>Pilih Penugasan</option>
+                    @foreach ($penugasans as $penugasan)
+                        <option value="{{ $penugasan->id }}">{{ $penugasan->nama_unit_bisnis }}</option>
+                    @endforeach
                 </select>
             </div>
 
 
             <!-- Dropdown Mentor -->
             <div class="mb-3">
-                <label for="mentor" class="form-label">Mentor</label>
-                <select class="form-control select2" id="mentor" name="mentor" required>
-                    <option value="Supri">Supri</option>
-                    <option value="Ahmad">Ahmad</option>
-                    <option value="Budi">Budi</option>
+                <label for="mentor" class="form-label">Pilih Mentor</label>
+                <select class="form-select select2" id="mentor" name="mentor" required>
+                    <option value="" disabled selected>Pilih Mentor</option>
+                    @foreach ($mentors as $mentor)
+                        <option value="{{ $mentor->id }}">{{ $mentor->name }}</option>
+                    @endforeach
                 </select>
             </div>
 
@@ -72,21 +75,22 @@
                 <input type="date" class="form-control" id="end_date" name="end_date" required>
             </div>
 
-            <!-- Password Autofill -->
+            <!-- Password (auto fill) -->
+
             <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password" value="rumahmesin" readonly>
+                <label for="password" class="form-label">Kata Sandi</label>
+                <input type="password" class="form-control" id="password" name="password" value="rumahmesin" readonly
+                    required>
             </div>
 
-            <!-- Confirm Password -->
             <div class="mb-3">
-                <label for="password_confirmation" class="form-label">Confirm Password</label>
+                <label for="password_confirmation" class="form-label">Konfirmasi Kata Sandi</label>
                 <input type="password" class="form-control" id="password_confirmation" name="password_confirmation"
-                    value="rumahmesin" readonly>
+                    value="rumahmesin" readonly required>
             </div>
 
-            <button type="submit" class="btn btn-primary">Create User</button>
-            <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+            <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">Batal</a>
         </form>
     </div>
 @endsection
@@ -105,7 +109,7 @@
         $(document).ready(function() {
             // Inisialisasi Select2
             $('.select2').select2({
-                placeholder: "Pilih Penugasan", // Placeholder jika ingin ditambahkan
+                placeholder: "Pilih", // Placeholder jika ingin ditambahkan
                 allowClear: true // Memungkinkan user untuk menghapus pilihan
             });
         });

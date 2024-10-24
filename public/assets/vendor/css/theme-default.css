@@ -108,7 +108,7 @@
 }
 
 a.bg-primary:hover, a.bg-primary:focus {
-  background-color: #6467f2 !important;
+  background-color: #f44335 !important;
 }
 
 .dropdown-notifications-item:not(.mark-as-read) .dropdown-notifications-read span {
@@ -226,8 +226,8 @@ button.list-group-item-primary.active {
 }
 .btn-check:checked + .btn-primary, .btn-check:active + .btn-primary, .btn-primary:active, .btn-primary.active, .show > .btn-primary.dropdown-toggle {
   color: #fff;
-  background-color: #595cd9;
-  border-color: #595cd9;
+  background-color: #f44335;
+  border-color: #f44335;
 }
 .btn-check:checked + .btn-primary:focus, .btn-check:active + .btn-primary:focus, .btn-primary:active:focus, .btn-primary.active:focus, .show > .btn-primary.dropdown-toggle:focus {
   box-shadow: none;

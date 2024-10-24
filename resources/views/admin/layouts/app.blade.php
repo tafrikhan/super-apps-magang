@@ -6,9 +6,12 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
     <title>@yield('title', 'Admin')</title>
-
+    <!-- Boxicons CSS -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon.ico') }}" />
+    <link rel="icon" type="image/x-icon"
+        href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQklJ0c2uKkN9rFBBfFTqESoy2S6dBxAsZIpQ&s" />
+
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -32,10 +35,9 @@
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
 
-    <!-- DataTables CSS -->
+
     <!-- Select2 CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
-
 
     <!-- Helpers -->
     <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
@@ -50,13 +52,15 @@
 
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                 <div class="app-brand demo">
-                    <a href="index.html" class="app-brand-link">
+
+                    <a href="{{ route('admin.dashboard') }}" class="app-brand-link">
                         <span class="app-brand-logo demo">
                             <img src="{{ asset('assets/img/logo/logo-rumah-mesin.png') }}" alt="App Logo"
                                 style="width: 50px; height: auto;" />
                         </span>
                         <span class="app-brand-text demo menu-text fw-bolder ms-2">Super Apps</span>
                     </a>
+
 
                     <a href="javascript:void(0);"
                         class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -68,67 +72,112 @@
 
                 <ul class="menu-inner py-1">
                     <!-- Dashboard -->
-                    <li class="menu-item active">
+                    <li class="menu-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                         <a href="{{ route('admin.dashboard') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Dashboard</div>
+                            <div data-i18n="Analytics">Halaman Utama</div>
                         </a>
                     </li>
-
-
 
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Pages</span>
                     </li>
-                    <li class="menu-item">
+
+                    <!-- Absensi Pengguna -->
+                    <li class="menu-item {{ request()->routeIs('admin.kehadiran.index') ? 'active' : '' }}">
                         <a href="{{ route('admin.kehadiran.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-task"></i>
-                            <div data-i18n="Tables">Absensi User</div>
+                            <div data-i18n="Tables">Absensi Pengguna</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+
+                    <!-- Manajemen Pengguna -->
+                    <li class="menu-item {{ request()->routeIs('admin.users.index') ? 'active' : '' }}">
                         <a href="{{ route('admin.users.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-user"></i>
-                            <div data-i18n="Tables">Management User</div>
+                            <i class="menu-icon tf-icons bx bx-group"></i>
+                            <div data-i18n="Tables">Manajemen Pengguna</div>
                         </a>
                     </li>
-                    <li class="menu-item">
-                        <a href="{{ route('admin.mentors.index') }}" class="menu-link">
+
+                    <!-- Instansi -->
+                    <li class="menu-item {{ request()->routeIs('instansi.index') ? 'active' : '' }}">
+                        <a href="{{ route('instansi.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-building"></i>
+                            <div data-i18n="Tables">Instansi</div>
+                        </a>
+                    </li>
+
+                    <!-- Penugasan -->
+                    <li class="menu-item {{ request()->routeIs('penugasan.index') ? 'active' : '' }}">
+                        <a href="{{ route('penugasan.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-book-content"></i>
+                            <div data-i18n="Tables">Penugasan</div>
+                        </a>
+                    </li>
+
+                    <!-- Laporan Harian -->
+                    <li
+                        class="menu-item {{ request()->routeIs('tim_web.*') || request()->routeIs('tim_sosmed.*') ? 'open' : '' }}">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-folder"></i>
+                            <div data-i18n="Laporan Harian">Laporan Harian</div>
+                        </a>
+                        <ul class="menu-sub">
+                            <!-- Tim Web -->
+                            <li class="menu-item {{ request()->routeIs('tim_web.index') ? 'active' : '' }}">
+                                <a href="{{ route('tim_web.index') }}" class="menu-link">
+                                    <i class="menu-icon tf-icons bx bx-book-content"></i>
+                                    <div data-i18n="Tim Web">Tim Web</div>
+                                </a>
+                            </li>
+                            <!-- Tim Sosmed -->
+                            <li class="menu-item {{ request()->routeIs('tim_sosmed.index') ? 'active' : '' }}">
+                                <a href="{{ route('tim_sosmed.index') }}" class="menu-link">
+                                    <i class="menu-icon tf-icons bx bx-book-content"></i>
+                                    <div data-i18n="Tim Sosmed">Tim Sosmed</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- Mentor -->
+                    <li class="menu-item {{ request()->routeIs('mentor.index') ? 'active' : '' }}">
+                        <a href="{{ route('mentors.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-user"></i>
                             <div data-i18n="Tables">Mentor</div>
                         </a>
                     </li>
 
 
-                    <li class="menu-item">
-                        <a href="{{ route('admin.instansi.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-user"></i>
-                            <div data-i18n="Tables">Nama Instansi</div>
+                    <!-- Pengajuan Izin -->
+                    <li class="menu-item {{ request()->routeIs('pengajuan_izin.index') ? 'active' : '' }}">
+                        <a href="{{ route('pengajuan_izin.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-user-check"></i>
+                            <div data-i18n="Pengajuan Izin">Kelola Pengajuan Izin</div>
                         </a>
                     </li>
 
-
-                    <!-- Misc -->
-                    <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
-                    <li class="menu-item">
-                        <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                            target="_blank" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-support"></i>
-                            <div data-i18n="Support">Support</div>
+                    <!-- Feedback -->
+                    <li class="menu-item {{ request()->routeIs('feedback.admin') ? 'active' : '' }}">
+                        <a href="{{ route('feedback.admin') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-message-square-dots"></i>
+                            <div>Masukan</div>
                         </a>
-                    </li>
-                    <li class="menu-item">
-                        <a href="#"
-                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                            class="menu-link d-flex align-items-center">
-                            <i class="menu-icon tf-icons bx bx-power-off"></i>
-                            <div data-i18n="Logout" class="ms-2">Logout</div>
-                        </a>
-                        <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
                     </li>
                 </ul>
+
+                <!-- Logout -->
+                <div class="logout-container py-2">
+                    <a href="#"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                        class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-power-off"></i>
+                        <div data-i18n="Logout" class="ms-2">Keluar</div>
+                    </a>
+                    <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                </div>
             </aside>
             <!-- / Menu -->
 
@@ -149,28 +198,21 @@
                         <div class="navbar-nav align-items-center">
                             <div class="nav-item d-flex align-items-center">
                                 <i class="bx bx-search fs-4 lh-0"></i>
-                                <input type="text" class="form-control border-0 shadow-none"
-                                    placeholder="Search..." aria-label="Search..." />
+                                <input type="text" class="form-control border-0 shadow-none" placeholder="Cari..."
+                                    aria-label="Cari..." />
                             </div>
                         </div>
                         <!-- /Search -->
 
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
-                            <!-- Place this tag where you want the button to render. -->
-                            <li class="nav-item lh-1 me-3">
-                                <a class="github-button"
-                                    href="https://github.com/themeselection/sneat-html-admin-template-free"
-                                    data-icon="octicon-star" data-size="large" data-show-count="true"
-                                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
-                            </li>
 
                             <!-- User -->
                             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="{{ asset('assets/img/avatars/1.png') }}" alt
-                                            class="w-px-40 h-auto rounded-circle" />
+                                        <img src="{{ asset(auth()->user()->profile_photo ? 'storage/' . auth()->user()->profile_photo : 'assets/img/avatars/default.jpg') }}"
+                                            alt="User Avatar" class="w-px-40 h-auto rounded-circle" />
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
@@ -179,63 +221,47 @@
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="{{ asset('assets/img/avatars/1.png') }}" alt
-                                                            class="w-px-40 h-auto rounded-circle" />
+                                                        <img src="{{ asset(auth()->user()->profile_photo ? 'storage/' . auth()->user()->profile_photo : 'assets/img/avatars/default.jpg') }}"
+                                                            alt="User Avatar" class="w-px-40 h-auto rounded-circle" />
                                                     </div>
                                                 </div>
+
                                                 <div class="flex-grow-1">
-                                                    <span class="fw-semibold d-block">John Doe</span>
-                                                    <small class="text-muted">Admin</small>
+                                                    <span
+                                                        class="fw-semibold d-block">{{ auth()->user()->name }}</span>
+                                                    <small class="text-muted">
+                                                        Admin<!-- Dynamic Role -->
+                                                    </small>
                                                 </div>
                                             </div>
                                         </a>
                                     </li>
-                                    <li>
-                                        <div class="dropdown-divider"></div>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="bx bx-user me-2"></i>
-                                            <span class="align-middle">My Profile</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="bx bx-cog me-2"></i>
-                                            <span class="align-middle">Settings</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <span class="d-flex align-items-center align-middle">
-                                                <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                                                <span class="flex-grow-1 align-middle">Billing</span>
-                                                <span
-                                                    class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <div class="dropdown-divider"></div>
-                                    </li>
-                                    <li>
-                                        <div class="dropdown-divider"></div>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#"
-                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            <i class="bx bx-power-off me-2"></i>
-                                            <span class="align-middle">Log Out</span>
-                                        </a>
-                                    </li>
 
-                                    <form id="logout-form" action="{{ route('admin.logout') }}" method="POST"
-                                        style="display: none;">
-                                        @csrf
-                                    </form>
-                                </ul>
+                                    <div class="dropdown-divider"></div>
                             </li>
-                            <!--/ User -->
+                            <li>
+                                <a class="dropdown-item" href="{{ route('admin.profile.edit') }}">
+                                    <i class="bx bx-user me-2"></i>
+                                    <span class="align-middle">Profil Saya</span>
+                                </a>
+                            </li>
+                            <li>
+                                <div class="dropdown-divider"></div>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="bx bx-power-off me-2"></i>
+                                    <span class="align-middle">Keluar</span>
+                                </a>
+                            </li>
+
+                            <form id="logout-form" action="{{ route('admin.logout') }}" method="POST"
+                                style="display: none;">
+                                @csrf
+                            </form>
+                        </ul>
+                        </li>
                         </ul>
                     </div>
                 </nav>
@@ -284,8 +310,43 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    <!-- Select2 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <style>
+        .menu-item.active .menu-link {
+            background-color: #007bff;
+            /* Change this to your desired color */
+            color: #ffffff;
+            /* Text color */
+        }
+
+        .menu-item.active .menu-icon {
+            color: #F4473A;
+            /* Change icon color when active */
+        }
+
+        .logout-container {
+            border-top: 1px solid #ddd;
+            /* Optional: add a top border for separation */
+            padding: 1rem;
+            /* Add padding for spacing */
+            margin-top: auto;
+            /* Push the logout button to the bottom */
+        }
+
+        .logout-container .menu-link {
+            color: #f00;
+            /* Change the color of the logout link */
+        }
+
+        .logout-container .menu-icon {
+            color: #f00;
+            /* Change icon color */
+        }
+    </style>
 
     <!-- Select2 JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
@@ -293,11 +354,8 @@
         $(document).ready(function() {
             // Inisialisasi Select2
             $('.select2').select2({
-                placeholder: "Pilih Penugasan", // Placeholder jika ingin ditambahkan
+                // placeholder: "Pilih Penugasan", // Placeholder jika ingin ditambahkan
                 allowClear: true // Memungkinkan user untuk menghapus pilihan
             });
         });
     </script>
-
-
-</body>

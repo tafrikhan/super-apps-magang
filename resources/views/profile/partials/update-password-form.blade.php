@@ -12,7 +12,7 @@
         <div class="row">
             <!-- Current Password -->
             <div class="col-md-6 mb-3">
-                <label for="update_password_current_password" class="form-label">Current Password</label>
+                <label for="update_password_current_password" class="form-label">KATA SANDI SAAT INI</label>
                 <input 
                     type="password" 
                     class="form-control @error('current_password') is-invalid @enderror"
@@ -28,7 +28,7 @@
 
             <!-- New Password -->
             <div class="col-md-6 mb-3">
-                <label for="update_password_password" class="form-label">New Password</label>
+                <label for="update_password_password" class="form-label">KATA SANDI BARU</label>
                 <input 
                     type="password" 
                     class="form-control @error('password') is-invalid @enderror"
@@ -44,7 +44,7 @@
 
             <!-- Confirm Password -->
             <div class="col-md-12 mb-3">
-                <label for="update_password_password_confirmation" class="form-label">Confirm Password</label>
+                <label for="update_password_password_confirmation" class="form-label">KONFIRMASI KATA SANDI BARU</label>
                 <input 
                     type="password" 
                     class="form-control @error('password_confirmation') is-invalid @enderror"
@@ -59,7 +59,7 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary w-100 mt-3">Save</button>
+        <button type="submit" class="btn btn-primary w-100 mt-3">Simpan Perubahan</button>
 
         @if (session('status') === 'password-updated')
             <div class="alert alert-success mt-3" style="background-color: #d4edda; color: #155724;">
